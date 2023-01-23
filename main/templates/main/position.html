@@ -1,0 +1,96 @@
+{% load static %}
+{% load i18n %}
+{% load view_breadcrumbs %}
+
+<!doctype html>
+<html>
+    <head>
+        <title>{{ position.name }}</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+        <link rel="stylesheet" href="{% static app_name|add:'/position.css' %}">
+        <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+        <script>
+            $(document).ready(function(){
+                // Getting positions from context
+                let positions = [];
+                {% if positions %}
+                    {% for pos in positions %}
+                        {% if pos.pk != position.pk %}
+                positions.push({
+                    "name": "{{ pos.name }}",
+                    "pk": "{{ pos.pk }}"
+                });
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                // Add html for other positions in crumb
+                let addHTML = "";
+                positions.forEach(function(pos){
+                    addHTML += "<p><a href='../"
+                        + pos["pk"]
+                        + "/'>" + pos["name"] + "</a></p>";
+                });
+                $('.position-variants').html(addHTML);
+
+                let currentCrumb = $('.breadcrumb').children().last();
+                
+                // Create change (open variant window) for crumb mouseover
+                currentCrumb.on("mouseover", function(){
+                    $('.position-variants').css({
+                        "display": "block",
+                        "left": currentCrumb.offset().left,
+                        "top": currentCrumb.offset().top + currentCrumb.height(),
+                    });
+                });
+                // Function for cursor out variant and crumb
+                function crumbOuter(){
+                    let variantsHover = $('.position-variants:hover').length != 0;
+                    let crumbHover = currentCrumb.is(":hover");
+                    if (!(variantsHover || crumbHover)){
+                        $('.position-variants').css("display", "none");
+                    }
+                }
+                // Add change for variant window & crumb
+                currentCrumb.on("mouseout", crumbOuter);
+                $('.position-variants').last().on("mouseout", crumbOuter);
+            });
+            
+
+
+        </script>
+    </head>
+    <body>
+        <header></header>
+        {% block breadcrumbs %}
+            {% render_breadcrumbs "main/breadcrumbs.html" %}
+        {% endblock %}
+        <div class="position-variants"></div>
+        <div class="content">
+            <div class="position-title">
+                <div class="position-logo">
+                    <img src="{{ position.banner.url }}" />
+                </div>
+                <div class="position-detail">
+                    <div class="position-name">
+                        {{ position.name }}
+                    </div>
+                    <div class="salary">
+                        {% blocktranslate with salary=position.salary %}getSalary({{ salary }}){% endblocktranslate %}
+                    </div>
+                </div>
+                
+            </div>
+            <div class="position-description">
+            {% if position.description %}
+                {{ position.description|safe }}
+            {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

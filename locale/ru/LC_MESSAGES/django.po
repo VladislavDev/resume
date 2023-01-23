@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-20 11:39+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\exp\templates\exp\index.html:9
+msgid "skills&exp"
+msgstr "Навыки и опыт"
+
+#: .\exp\templates\exp\index.html:30 .\main\templates\main\index.html:93
+msgid "keyskills"
+msgstr "Ключевые навыки"
+
+#: .\main\templates\main\index.html:7
+msgid "Resume"
+msgstr "Резюме"
+
+#: .\main\templates\main\index.html:55
+msgid "About me"
+msgstr "Обо мне"
+
+#: .\main\templates\main\index.html:57
+msgid ""
+"A young IT specialist, scientist, business analyst\n"
+"                        and developer - I am used to exploring new "
+"professional\n"
+"                        fields for myself. The ability to self-study for me "
+"is\n"
+"                        not just words. For example, this site was created "
+"in\n"
+"                        the context of Django learning."
+msgstr ""
+"Молодой IT-специалист, ученый, бизнес-аналитик и\n"
+"                        разработчик - я привык изучать новые для себя\n"
+"                        профессиональные сферы. Способность к самообучению\n"
+"                        для меня - это не просто слова. Например, этот сайт\n"
+"                        создан в контексте изучения Django."
+
+#: .\main\templates\main\index.html:62
+msgid ""
+"Finding myself in a new environment, I try to formulate\n"
+"                        my development proposals. Include me in a new "
+"project, and I will find\n"
+"                        what can be done better. Show me the business "
+"processes of the enterprise,\n"
+"                        and I will suggest how to make them more efficient. "
+"Tell me about the\n"
+"                        planned changes and I will give you tips on how to "
+"plan\n"
+"                        them."
+msgstr ""
+"Оказываясь в новой среде я стараюсь сформулировать\n"
+"                        свои предложения по развитию. Включите меня в новый\n"
+"                        проект, и я найду, что можно сделать лучше. "
+"Покажите\n"
+"                        мне бизнес-процессы предприятия, и я предложу, как\n"
+"                        сделать их эффективнее. Расскажите мне о "
+"планируемых\n"
+"                        изменениях, и я дам советы по их планированию."
+
+#: .\main\templates\main\index.html:68
+msgid ""
+"Get acquainted with my skills, I think we have mutually\n"
+"                        beneficial employment conditions."
+msgstr ""
+"Ознакомьтесь с моими навыками, думаю, у нас с вами есть\n"
+"                        взаимовыгодные условия трудоустройства."
+
+#: .\main\templates\main\index.html:71
+msgid "Desired position and salary"
+msgstr "Желаемая должность и заработная плата"
+
+#: .\main\templates\main\index.html:82 .\main\templates\main\position.html:33
+#, python-format
+msgid "getSalary(%(salary)s)"
+msgstr "%(salary)s ₽"
+
+#: .\main\views.py:60
+msgid "Home"
+msgstr "Главная"
+
+#: .\main\views.py:66
+msgid "Desired position"
+msgstr "Желаемая должность"
+
+msgid "Vladislav Sokolov"
+msgstr "Соколов Владислав"

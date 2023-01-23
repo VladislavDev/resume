@@ -1,0 +1,200 @@
+html{
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    margin: 0 0 0 0;
+}
+.background-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.lefthalf-background{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+.righthalf-background{
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(to right, #00000000 0%, #000000aa 30%, #000000ff 100%);
+    transform: skewX(15deg) translate(calc(50%/3.73), 0);
+    position: absolute;
+    top: 0;
+    right: 0;
+    vertical-align: middle;
+}
+.lang-container{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    height: 40px;
+    aspect-ratio: 120 / 85;
+    overflow: hidden;
+}
+.lang-container:hover{
+    aspect-ratio: 300 / 85;
+}
+.lang-container > img{
+    margin: 2px;
+    height: 96%;
+    aspect-ratio: 120 / 85;
+    vertical-align: middle;
+    filter: grayscale(80%);
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-flex;
+}
+.lang-container > img:hover{
+    filter: grayscale(0%);
+}
+.backtitle{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.info-wrapper{
+    width: 500px;
+    height: 115px;
+    margin-right: 100px;
+    margin-left: auto;
+    position: sticky;
+    top: calc((100vh - 115px) / 2);
+}
+.myinfo{
+    width: 500px;
+    height: 115px;
+    
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+
+    z-index: 500;
+}
+.photo-container{
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    float: right;
+    overflow: hidden;
+}
+.photo{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.myname{
+    float: right;
+    color: #bbbbbb;
+    font-weight: bold;
+    font-size: 32pt;
+    width: min-content;
+    text-align: right;
+    margin-right: 40px;
+}
+.quote{
+    color: #5c5c5c;
+    font-weight: bold;
+    width: 80%;
+    float: right;
+    text-align: right;
+    padding-right: 15px;
+    padding-top: 15px;
+    z-index: 100;
+
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+.quote > q{
+    quotes: '\201C' '\201D';
+}
+.info-container{
+    position: sticky;
+    display: flex;
+    top: calc(135px - 100%);
+    width: 100%;
+    height: 100vh;
+    background-color: #ff000025;
+    z-index: 200;
+}
+.info{
+    height: min-content;
+    width: 100%;
+    background-color: #14b22c4e;
+    margin-top: auto;
+    margin-bottom: auto;
+    position: sticky;
+    top: 0;
+}
+.content-container{
+    background: #ffffff;
+    top: 220px;
+    bottom: 0;
+    position: sticky;
+    z-index: 100;
+}
+.content{
+    padding: 20px;
+    width: 60%;
+}
+.heading{
+    margin-top: 20px;
+    font-size: 32pt;
+    color: #393939;
+}
+.text-content > p{
+    padding-left: 20px;
+    text-align: justify;
+}
+.pos-card{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    border-radius: 50%;
+}
+.pos-card-wrapper{
+    height: 100%;
+    aspect-ratio: 1 / 1;
+}
+.pos-card-info{
+    margin-left: 15px;
+    font-weight: 500;
+    height: min-content;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.desiredPositions{
+    width: min-content;
+    margin-left: 40px;
+}
+.desiredPositionCard{
+    height: 100px;
+    width: 100%;
+    
+    margin-top: 10px;
+    display: inline-flex;
+    cursor: pointer;
+}
+.dp-salary-wrapper{
+    font-size: 16pt;
+}
+.dp-position-wrapper{
+    font-size: 20pt;
+    white-space: nowrap;
+}
+.desiredPositions > a:active, 
+.desiredPositions > a:hover,
+.desiredPositions > a{
+    text-decoration: none;
+    color: #000000;
+}

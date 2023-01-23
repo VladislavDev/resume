@@ -1,0 +1,103 @@
+{% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+
+<!DOCTYPE html>
+<head>
+    <title>{% trans 'skills&exp' %}</title>
+    <link rel="stylesheet" href="{% static 'exp/style.css' %}">
+    <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
+    <script>
+        function getTunedColor(color, tune) {
+            let newRGB = "#";
+            [
+                parseInt(color.slice(1,3), 16), // R
+                parseInt(color.slice(3,5), 16), // G
+                parseInt(color.slice(5,7), 16)  // B
+            ].forEach(function(col, ind, rgb){
+                // Parse heximal color with limits
+                newRGB += ((col + tune < 0) ? 0 : ((col + tune > 255) ? 255 : col + tune)).toString(16);
+            });
+            return newRGB;
+        }
+    </script>
+</head>
+<body>
+    <div class="header"></div>
+    <div class="section-name">
+        {% trans 'keyskills' %}
+    </div>
+    <div class="skills-container">
+    {% if skill_list %}
+    {% for skill in skill_list %}
+        <div class="skill-card" id="{{ skill.id }}">
+            <div class="skill-card-container">
+                <img class="skill-card-icon" src="{{ skill.icon.url }}"/>
+                <div class="skill-card-name">{{ skill.name }}</div>
+            </div>
+        </div>
+    {% endfor %}
+    {% for subskill in sub_skill_list %}
+        <div class="skill-card" sub="{{ subskill.key_skill.id }}" style="background: #{{ subskill.key_skill.activeColor }}22; display: none;">
+            <div class="skill-card-container">
+                <img class="skill-card-icon" src="{{ subskill.icon.url }}"/>
+                <div class="skill-card-name">{{ subskill.name }}</div>
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+        <div class="skill-card">
+            <div class="skill-card-name">Key skills are unavailible.</div>
+        </div>
+    {% endif %}
+    </div>
+    
+    <script>
+        let activeColors = {{% for skill in skill_list %}
+            "{{ skill.id }}": "#{{ skill.activeColor }}",
+        {% endfor %}}
+
+        $('.skill-card').click(function(){
+            let element = $(this);
+            if (typeof element.attr("id") !== 'undefined'){
+                if (typeof element.attr("active") === 'undefined'){
+                    element.css("background", activeColors[element.attr("id")]);
+                    element.attr("active", "");
+                    $('.skill-card[sub=' + element.attr("id") + ']').css("display", "block");
+                } else {
+                    element.css("background", "#f7f7f7");
+                    element.removeAttr("active");
+                    $('.skill-card[sub=' + element.attr("id") + ']').css("display", "none");
+                }
+            }
+        });
+        $('.skill-card').hover(function(){
+            let element = $(this);
+            if (typeof element.attr("id") !== 'undefined')
+                element.css("background", getTunedColor(activeColors[$(this).attr("id")], 40));
+        }, function(){
+            let element = $(this);
+            if (typeof element.attr("id") !== 'undefined')
+                element.css(
+                    "background", 
+                    typeof element.attr("active") === 'undefined' ? "#f7f7f7" : activeColors[element.attr("id")]
+                );
+        });
+    </script>
+    <form class="langchange" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}">
+        <select name="language">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                    {{ language.name_local }} ({{ language.code }})
+                </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Go">
+    </form>
+</body>

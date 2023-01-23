@@ -1,0 +1,141 @@
+{% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<!doctype html>
+<html>
+    <head>
+        <title>{% translate 'Resume' %} - {% translate myself.name %}</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+        <link rel="stylesheet" href="{% static app_name|add:'/style.css' %}">
+        <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
+        <script>
+            $(document).ready(function(){
+                const d = parseInt($('.info-container').css('height').match(/\d*/)[0]) - 
+                    ((parseInt($('.info-container').css('height').match(/\d*/)[0]) - 
+                    parseInt($('.myinfo').css('height').match(/\d*/)[0])) / 2 +
+                    parseInt($('.myinfo').css('height').match(/\d*/)[0]) + 
+                    parseInt($('.quote').css('height').match(/\d*/)[0]) + 
+                    parseInt($('.quote').css('padding-top').match(/\d*/)[0]));
+                $(document).scroll(function(){
+                    let percent = 1 - $(window).scrollTop() / d;
+                        $('.quote').css(
+                            "opacity",
+                            percent >= 0 ? percent : 0
+                        );
+                });
+
+
+                $('.lang').click(function(){
+                    let csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+                    $.post("{% url 'set_language' %}", { 
+                        csrfmiddlewaretoken: csrftoken,
+                        language: $(this).attr("id"), 
+                        next: "{{ redirect_to }}" 
+                    }, function(data) {
+                        top.location.href="{{ redirect_to }}";
+                    });
+                });
+            });
+        </script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!---->
+        <div class="info-container">
+            <div class="background-container" id="backgroung">
+                <div class="lefthalf-background">
+                    <img class="backtitle" src="{{ left_title }}" />
+                </div>
+                <div class="righthalf-background"></div>
+                <div class="lang-container">
+                    {% csrf_token %}
+                    <img src="{% static 'langs/'|add:LANGUAGE_CODE|add:'.png' %}" />
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as langs %}
+                    {% for lang in langs %}
+                        {% if lang.code != LANGUAGE_CODE %}
+                        <img class="lang" id="{{ lang.code }}" 
+                        src="{% static 'langs/'|add:lang.code|add:'.png' %}" />
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="info-wrapper">
+                <div class="myinfo">
+                    <div class="photo-container">
+                        <img class="photo" src="{{ myself.photo }}" />
+                    </div>
+                    <div class="myname">{% translate myself.name %}</div>
+                </div>
+                <div class="quote"><q>{{ randomQuote }}</q></div>
+            </div>
+        </div>
+        </div>
+        <div class="content-container">
+            <div class="content">
+                <div class="heading">{% translate 'About me' %}</div>
+                <div class="text-content">
+                    <p>{% blocktranslate %}A young IT specialist, scientist, business analyst
+                        and developer - I am used to exploring new professional
+                        fields for myself. The ability to self-study for me is
+                        not just words. For example, this site was created in
+                        the context of Django learning.{% endblocktranslate %}</p>
+                    <p>{% blocktranslate %}Finding myself in a new environment, I try to formulate
+                        my development proposals. Include me in a new project, and I will find
+                        what can be done better. Show me the business processes of the enterprise,
+                        and I will suggest how to make them more efficient. Tell me about the
+                        planned changes and I will give you tips on how to plan
+                        them.{% endblocktranslate %}</p>
+                    <p>{% blocktranslate %}Get acquainted with my skills, I think we have mutually
+                        beneficial employment conditions.{% endblocktranslate %}</p>
+                </div>
+                <div class="heading">{% translate 'Desired position and salary' %}</div>
+                <div class="text-content">
+                    <div class="desiredPositions">
+                    {% for position in desiredPositions %}
+                        <a href="position/{{ position.pk }}/">
+                            <div class="desiredPositionCard">
+                                <div class="pos-card-wrapper">
+                                    <img class="pos-card" src="{{ position.banner.url }}" />
+                                </div>
+                                <div class="pos-card-info">
+                                    <div class="dp-salary-wrapper">
+                                        {% blocktranslate with salary=position.salary %}getSalary({{ salary }}){% endblocktranslate %}
+                                    </div>
+                                    <div class="dp-position-wrapper">
+                                        {{ position.name }}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                    </div>
+                </div>
+                <div class="heading">{% translate 'keyskills' %}</div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<!--
+
+Copyright 2022 Sokolov Vladislav
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-->

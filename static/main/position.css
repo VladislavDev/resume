@@ -1,0 +1,111 @@
+html{
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    margin: 0 0 0 0;
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(to right bottom, #3a3a3a, #565656);
+    z-index: 500;
+}
+.breadcrumb{
+    margin: auto 0 auto 0;
+    position: fixed;
+    top: 70px;
+    z-index: 500;
+    width: 100%;
+    background-color: #ffffff;
+    color: #393939;
+    font-size: 10pt;
+    padding-left: 10px;
+}
+.breadcrumb > span > a:active, 
+.breadcrumb > span > a{
+    text-decoration: none;
+    color: #393939;
+}
+.breadcrumb > span:hover, .breadcrumb > span > a:hover{
+    text-decoration: none;
+    color: #244ca9;
+}
+.breadcrumb > span{
+    cursor: pointer;
+}
+.divider:hover{
+    text-decoration: none;
+    color: #393939;
+    cursor: default;
+}
+.position-variants{
+    position: fixed;
+    display: none;
+    z-index: 600;
+    top: 100px;
+    background: #f9f9f9;
+    padding: 5px;
+    border-radius: 2px;
+}
+.position-variants > p{
+    margin: 0;
+}
+.position-variants > p > a,
+.position-variants > p > a:active{
+    text-decoration: none;
+    color: #393939;
+    font-size: 10pt;
+}
+
+.position-variants > p > a:hover{
+    text-decoration: none;
+    color: #244ca9;
+    font-size: 10pt;
+}
+.content{
+    position: relative;
+    width: /*calc(100% - 160px)*/ 76%;
+    padding: 100px 12% 0 12%;
+    text-align: justify;
+    font-size: 18pt;
+}
+.position-title{
+    width: 100%;
+    display: inline-flex;
+}
+.position-logo{
+    width: 150px;
+    aspect-ratio: 1 / 1;
+}
+.position-logo > img{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+.position-detail{
+    height: 100%;
+    width: max-content;
+    margin: auto auto auto 20px;
+}
+.position-name{
+    font-size: 24pt;
+    font-weight: 500;
+}
+.salary{
+    font-size: 20pt;
+}
+.position-description > h3{
+    padding: 5px 10px 5px 10px;
+    color: #f1f1f1;
+    width: 60%;
+    font-weight: 600;
+    background: linear-gradient(to right, #343434, #ffffff);
+}
+.position-description > p{
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 16pt;
+}
