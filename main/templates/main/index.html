@@ -9,7 +9,7 @@
         <title>{% translate 'Resume' %} - {% translate myself.name %}</title>
         <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
         <link rel="stylesheet" href="{% static app_name|add:'/style.css' %}">
-        <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
                 const d = parseInt($('.info-container').css('height').match(/\d*/)[0]) - 
